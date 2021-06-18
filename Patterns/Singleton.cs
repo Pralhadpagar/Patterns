@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patterns
 {
-   public  class Singleton
+   public  class Singleton 
     {
         static void Main(string[] args)
         {
@@ -25,6 +25,9 @@ namespace Patterns
         {
             singletonClass instance = singletonClass.Instance;
             instance.PrintDetails("DetailEmp");
+            // or if static then reference or instance is not require
+
+            singletonClass.staticmethod();
             //Console.WriteLine("DetailEmp");
             //Console.Read();
         }
@@ -35,14 +38,25 @@ namespace Patterns
             //Console.WriteLine("securitydetails");
             //Console.Read();
         }
+
+        public void onException()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
     /// <summary>
     /// singaleton class in sealed should be because if inheritance not possible.
     /// </summary>
-    public sealed class singletonClass
+    /// 
+    /// can implement interface
+    /// derived class must come before derived class and inherit from other classes
+   public sealed class singletonClass : derivedclass, IGlobalInterface
 
+    //not possible this as static 
+      //  public static class singletonClass
+    //public sealed class singletonClass : IGlobalInterface
     {
         private static int counter = 0;
 
@@ -101,11 +115,11 @@ namespace Patterns
         }
 
         //we can take static as well as below 
-        //public static void printDetail()
-        //{
-        //    Console.WriteLine("print");
-        //    Console.Read();
-        //}
+        public static void staticmethod()
+        {
+            Console.WriteLine("print");
+            Console.Read();
+        }
 
         //public  void printDetail()
         //{
@@ -116,6 +130,11 @@ namespace Patterns
         {
             Console.WriteLine(message);
             Console.Read();
+        }
+
+        public void onException()
+        {
+            throw new NotImplementedException();
         }
     }
 
