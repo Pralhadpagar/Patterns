@@ -37,12 +37,15 @@ namespace Patterns
             get
             {
                 // Thread safe singaleton example.
-                lock(singletonInstance)
-                 {
-                    if (singletonInstance == null)
+                if (singletonInstance == null)
+                {
+                    lock (singletonInstance)
                     {
+                        if (singletonInstance == null)
+                        {
 
-                        singletonInstance = new singletonClass();
+                            singletonInstance = new singletonClass();
+                        }
                     }
                 }
                return singletonInstance ;
