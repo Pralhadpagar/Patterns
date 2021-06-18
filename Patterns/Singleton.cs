@@ -9,11 +9,9 @@ namespace Patterns
    public  class Singleton
     {
         static void Main(string[] args)
-        {
-                        
+        {                        
               singletonClass myclass = singletonClass.Instance;
               singletonClass.printDetail();
-
         }
     }
 
@@ -38,10 +36,14 @@ namespace Patterns
         {
             get
             {
-                if(singletonInstance==null)
-                {
+                // Thread safe singaleton example.
+                lock(singletonInstance)
+                 {
+                    if (singletonInstance == null)
+                    {
 
-                    singletonInstance = new singletonClass();
+                        singletonInstance = new singletonClass();
+                    }
                 }
                return singletonInstance ;
             }            
