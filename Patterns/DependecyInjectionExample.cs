@@ -10,8 +10,19 @@ namespace Patterns
     {
         static void Main(string[] args)
         {
-            EmployeeBL employeeBL = new EmployeeBL(new EmployeeDAL());
-            List<Employee> list = employeeBL.getAllEmployee();
+            //this is for constructor injection
+            // EmployeeBL employeeBL = new EmployeeBL(new EmployeeDAL());
+            // List<Employee> list = employeeBL.getAllEmployee();
+
+            // this is for constuctot injection            
+            //EmployeeBL employeeBL = new EmployeeBL();
+            //employeeBL.employeeInterfaceprop = new EmployeeDAL();
+            //List<Employee> list = employeeBL.getAllEmployee();
+
+            //  this is for method injection
+            EmployeeBL employeeBL = new EmployeeBL();
+           List<Employee> list = employeeBL.getAllEmployee(new EmployeeDAL());
+
             foreach (var item in list)
             {
                 Console.WriteLine("ID = {0} , Name ={1}", item.ID, item.name);
@@ -65,13 +76,44 @@ namespace Patterns
             public IEmployeeDAL employeeDAL;
 
             // created one object which accept dependcy object type.// it can accept any concrete class which implement this interface.
-            public EmployeeBL(IEmployeeDAL emp)
+
+            //constructor injection ; commented or property and method injection.
+            //public EmployeeBL(IEmployeeDAL emp)
+            //{
+            //    this.employeeDAL = emp;
+            //}
+
+
+            // with property injection
+
+            public IEmployeeDAL employeeInterfaceprop
+
             {
-                this.employeeDAL = emp;
+
+                set
+                {
+
+                    this.employeeDAL = value;    
+                }
+
+                get
+                {
+
+                    if(employeeInterfaceprop==null)
+                    {
+                        throw new Exception("employee is not initialized");
+                    }
+                    else
+                    {
+                        return this.employeeDAL;
+                    }
+                }
             }
 
-            public List<Employee> getAllEmployee()
+
+            public List<Employee> getAllEmployee(IEmployeeDAL employeedal)
             {
+                this.employeeDAL = employeedal;
                 // dont require object creation here 
                 // empDal = new EmployeeDAL();
                 return employeeDAL.getEmployeeDetailFromDatabase();
