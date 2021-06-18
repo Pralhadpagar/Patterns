@@ -26,6 +26,7 @@ namespace Patterns
 
         // private static readonly singletonClass singletonInstance = new singletonClass();
         private static singletonClass singletonInstance = null;
+        private static readonly object sharedresource = new object();
         private singletonClass()
         {
             counter++;
@@ -36,10 +37,10 @@ namespace Patterns
         {
             get
             {
-                // Thread safe singaleton example.
-                if (singletonInstance == null)
-                {
-                    lock (singletonInstance)
+                //// Thread safe singaleton example.
+                //if (singletonInstance == null)
+                //{
+                    lock (sharedresource)
                     {
                         if (singletonInstance == null)
                         {
@@ -47,7 +48,7 @@ namespace Patterns
                             singletonInstance = new singletonClass();
                         }
                     }
-                }
+                //}
                return singletonInstance ;
             }            
              
