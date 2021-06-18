@@ -38,8 +38,8 @@ namespace Patterns
             get
             {
                 //// Thread safe singaleton example.
-                //if (singletonInstance == null)
-                //{
+                if (singletonInstance == null)
+                {
                     lock (sharedresource)
                     {
                         if (singletonInstance == null)
@@ -48,7 +48,7 @@ namespace Patterns
                             singletonInstance = new singletonClass();
                         }
                     }
-                //}
+                }
                return singletonInstance ;
             }            
              
