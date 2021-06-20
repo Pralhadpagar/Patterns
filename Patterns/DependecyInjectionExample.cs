@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity;
 
 namespace Patterns
 {
@@ -10,6 +11,32 @@ namespace Patterns
     {
         static void Main(string[] args)
         {
+            // Unity allowed u to register certain type of properties which you are going inserting to your other classes.
+            // testing database or production ... change then unity is require
+
+            // unity for dependcy injection.
+
+            UnityContainer container = new UnityContainer();
+            
+            //   container.RegisterType<EmployeeDAL>();
+            container.RegisterType<IEmployeeDAL, EmployeeDAL>();
+            container.RegisterType<IBusiness, EmployeeBL>();
+            EmployeeBL objBL = container.Resolve<EmployeeBL>();
+          //  container.RegisterType<EmployeeBL>();
+            List<Employee> list = objBL.getAllEmployee();
+
+
+//            Unity
+//StructureMap
+//Castle Windsor
+//Ninject
+//Autofac
+//DryIoc
+//Simple Injector
+//Light Inject
+
+
+
             //this is for constructor injection
             // EmployeeBL employeeBL = new EmployeeBL(new EmployeeDAL());
             // List<Employee> list = employeeBL.getAllEmployee();
@@ -20,13 +47,12 @@ namespace Patterns
             //List<Employee> list = employeeBL.getAllEmployee();
 
             //  this is for method injection
-            EmployeeBL employeeBL = new EmployeeBL();
-           List<Employee> list = employeeBL.getAllEmployee(new EmployeeDAL());
+            //// EmployeeBL employeeBL = new EmployeeBL();
+            ////List<Employee> list = employeeBL.getAllEmployee(new EmployeeDAL());
 
             foreach (var item in list)
             {
-                Console.WriteLine("ID = {0} , Name ={1}", item.ID, item.name);
-                           
+                Console.WriteLine("ID = {0} , Name ={1}", item.ID, item.name);                           
             }
 
             Console.ReadKey();
@@ -67,7 +93,13 @@ namespace Patterns
 
     }
 
-        public class EmployeeBL
+    
+        public interface IBusiness
+        {
+            List<Employee> getAllEmployee();
+        }
+    
+    public class EmployeeBL : IBusiness
 
         {
             // public EmployeeDAL empDal;
@@ -77,11 +109,11 @@ namespace Patterns
 
             // created one object which accept dependcy object type.// it can accept any concrete class which implement this interface.
 
-            //constructor injection ; commented or property and method injection.
-            //public EmployeeBL(IEmployeeDAL emp)
-            //{
-            //    this.employeeDAL = emp;
-            //}
+            //constructor injection ; commented or property and method injection. // for unit open it
+            public EmployeeBL(IEmployeeDAL emp)
+            {
+                this.employeeDAL = emp;
+            }
 
 
             // with property injection
@@ -89,13 +121,10 @@ namespace Patterns
             public IEmployeeDAL employeeInterfaceprop
 
             {
-
                 set
                 {
-
                     this.employeeDAL = value;    
                 }
-
                 get
                 {
 
@@ -110,12 +139,21 @@ namespace Patterns
                 }
             }
 
+            //method injection
+            //public List<Employee> getAllEmployee(IEmployeeDAL employeedal)
+            //{
+            //    this.employeeDAL = employeedal;
+            //    // dont require object creation here 
+            //    // empDal = new EmployeeDAL();
+            //    return employeeDAL.getEmployeeDetailFromDatabase();
 
-            public List<Employee> getAllEmployee(IEmployeeDAL employeedal)
-            {
-                this.employeeDAL = employeedal;
-                // dont require object creation here 
-                // empDal = new EmployeeDAL();
+            //}
+
+
+            // using unity framework
+
+            public List<Employee> getAllEmployee()
+            {                
                 return employeeDAL.getEmployeeDetailFromDatabase();
 
             }
