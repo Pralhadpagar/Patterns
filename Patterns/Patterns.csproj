@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Patterns.DependecyInjectionExample</StartupObject>
+    <StartupObject>Patterns.Genericscollection</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,8 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollectionTest.cs" />
+    <Compile Include="ArrayTest.cs" />
+    <Compile Include="collectionornongenricsCollection.cs" />
     <Compile Include="DependecyInjectionExample.cs" />
+    <Compile Include="Genericscollection.cs" />
     <Compile Include="IGlobalInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
