@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Patterns
 {
 
-    // can not be create object
-    public static class StaticTest 
+    // can not be create object// not implement interface and cann not any class derive this class
+    public static class StaticTest /*:IGlobalInterface*/
     {
         // static class can not have intance  constructor
         //public StaticTest()
@@ -16,29 +16,41 @@ namespace Patterns
 
         //}
 
-        // access modifier not allowed on constructor static
-        //public static StaticTest()
-        //    {
+       // access modifier not allowed on constructor static
+       // static StaticTest()
+       // {
 
-        //    }
+       // }
 
-        // static constructor must be pararmeter less
-        //static StaticTest( int a)
-        //{
+       //// static constructor must be pararmeter less
+       // static StaticTest()
+       // {
 
 
-        //}
+       // }
 
-           static StaticTest()
+        static StaticTest()
             {
-              
-            }
+
+            Console.WriteLine("Counter is {0}");
+        }
 
         // can not declare instance memeber
-        //public void test()
+        public static void test()
 
+        { 
+            //return 2;
+        }
+
+        internal static int test(int a)
+
+        {
+            return 2;
+        }
+
+        //public void onException()
         //{
-
+        //    throw new NotImplementedException();
         //}
     }
 
@@ -65,6 +77,12 @@ namespace Patterns
 
 
         //}
+
+        public static void test()
+        {
+            Console.WriteLine("Counter is {0}");
+
+        }
     }
 
 
