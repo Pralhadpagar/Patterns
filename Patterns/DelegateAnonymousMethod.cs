@@ -135,9 +135,11 @@ namespace Patterns
         public string Gender { get; set; }
         public double Salary { get; set; }
 
+        public int Age { get; set; }
+
         public override string ToString()
         {
-            return Name; 
+            return Name + ""+ ID; 
         }
     }
 }

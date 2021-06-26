@@ -10,7 +10,7 @@ namespace Patterns
     // only public , not other modifier for abstract class
 
     // need to check on modifiers on class basis and other type basis
-   public class AbstractTest
+   public class AbstractTest :  IGlobalInterface
     {
         public static void Main()
         {
@@ -40,6 +40,10 @@ namespace Patterns
 
         }
 
+        public void onException()
+        {
+            throw new NotImplementedException();
+        }
     }   
 
     // any other class type can derive from abstract class. typically is super class for base classes//
